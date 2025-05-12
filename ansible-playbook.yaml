@@ -25,4 +25,4 @@
 #    command: docker push web-img
 
   - name: run container in docker 
-    command: docker container run -d --name ansi-pb -p 8001:80 ansible-img
+    command: docker container run -d --name ansi-pb -p 80:80 ansible-img
