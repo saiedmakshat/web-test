@@ -1,0 +1,28 @@
+---
+- name: "Build container with ansible"
+  hosts: localhost
+  tasks:
+  - name: stoping exist container
+    command: docker stop ansi-pb
+    ignore_errors: yes
+
+
+  - name: remove exist container
+    command: docker rm ansi-pb
+    ignore_errors: yes
+
+  - name: build docker image from dockerfile
+    command: docker rmi ansible-img
+    ignore_errors: yes
+
+  - name: build docker image from dockerfile
+    command: docker build -t ansible-img .
+  
+  - name: insert tag to image
+    command: docker tag ansible-img saiedmakshat/saied
+
+  - name: push image to docker hube
+    command: docker push saiedmakshat/saied
+
+  - name: run container in docker 
+    command: docker container run -d --name ansi-pb -p 8001:80 ansible-img
